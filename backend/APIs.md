@@ -57,7 +57,7 @@ This file contains a detailed description of the API design.
         - `name`:
             - required.
             - type string.
-            - length [2, 100].
+            - length [2, 255].
         - `username`:
             - required.
             - type string.
@@ -67,7 +67,7 @@ This file contains a detailed description of the API design.
         - `email`:
             - required.
             - type string.
-            - length [5, 100].
+            - length [5, 255].
             - It must be an email.
         - `password`:
             - required.
@@ -213,7 +213,7 @@ This file contains a detailed description of the API design.
         - `name`:
             - required.
             - type string.
-            - length [2, 100].
+            - length [2, 255].
         - `username`:
             - required.
             - type string.
@@ -223,7 +223,7 @@ This file contains a detailed description of the API design.
         - `email`:
             - required.
             - type string.
-            - length [5, 100].
+            - length [5, 255].
             - It must be an email.
         - `password`:
             - required.
