@@ -20,6 +20,7 @@ import { omitObjectKeys } from 'src/utils/omit.util';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dtos/login.dto';
 import { UpdateUserDto } from './dtos/update.dto';
+import { UpdatePasswordDto } from './dtos/update-password.dto';
 
 @Injectable()
 export class UserService {
@@ -81,6 +82,14 @@ export class UserService {
         ) throw new BadRequestException("Invalid body!");
         Object.assign(user, updateUserDto);
         return this.formatUserData(await user.save());
+    }
+
+    async updatePass( updatePasswordDto: UpdatePasswordDto, user: UserEntity): Promise<void> {
+        const oldPasswordHash = await bcrypt.hash(updatePasswordDto.oldPassword, user.salt);
+        if ( oldPasswordHash !== user.password ) throw new UnauthorizedException();
+        user.password = await bcrypt.hash(updatePasswordDto.password, user.salt);
+        await user.save();
+        return;
     }
 
     private formatUserData( user: UserEntity ): FullUserData {

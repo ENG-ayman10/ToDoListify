@@ -23,6 +23,7 @@ import { refreshTokenCookieConfig } from 'src/config/cookies.config';
 import { omitObjectKeys } from 'src/utils/omit.util';
 import { LoginDto } from './dtos/login.dto';
 import { UpdateUserDto } from './dtos/update.dto';
+import { UpdatePasswordDto } from './dtos/update-password.dto';
 
 @Controller('user')
 export class UserController {
@@ -83,10 +84,12 @@ export class UserController {
     @UseGuards(JwtAuthGuard)
     @Patch('update/pass')
     updatePassword(
+        @Body(ValidationPipe) updatePasswordDto: UpdatePasswordDto,
         @GetUser() user: UserEntity,
-        @Res() res: Response // INFO: Use to update the cookies.
+        
     ) {
         this.logger.log(`PATCH ${this.API_PATH}/update/pass`);
+        return this.userService.updatePass(updatePasswordDto, user);
     }
     
     @UseGuards(JwtAuthGuard)
