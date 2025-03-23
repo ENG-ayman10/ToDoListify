@@ -1,4 +1,5 @@
 import { 
+    BadRequestException,
     HttpException,
     HttpStatus,
     Injectable,
@@ -18,6 +19,7 @@ import { JwtPayloadInterface } from 'src/auth/interfaces';
 import { omitObjectKeys } from 'src/utils/omit.util';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dtos/login.dto';
+import { UpdateUserDto } from './dtos/update.dto';
 
 @Injectable()
 export class UserService {
@@ -67,6 +69,18 @@ export class UserService {
         } catch( _ ) {
             throw new UnauthorizedException();
         }
+    }
+
+    async updateInfo( updateUserDto: UpdateUserDto, user: UserEntity ): Promise<FullUserData> {
+        const updateUserDtoKeys: string[] = Object.keys(updateUserDto);
+        const updatefields: string[] = [ 'name', 'username', 'email' ];
+        if (
+            updateUserDtoKeys.length > updatefields.length ||
+            updateUserDtoKeys.length < 1 ||
+            !updateUserDtoKeys.every( (key) => updatefields.includes(key) )
+        ) throw new BadRequestException("Invalid body!");
+        Object.assign(user, updateUserDto);
+        return this.formatUserData(await user.save());
     }
 
     private formatUserData( user: UserEntity ): FullUserData {

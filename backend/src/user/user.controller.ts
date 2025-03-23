@@ -22,6 +22,7 @@ import { FullUserData } from './interfaces';
 import { refreshTokenCookieConfig } from 'src/config/cookies.config';
 import { omitObjectKeys } from 'src/utils/omit.util';
 import { LoginDto } from './dtos/login.dto';
+import { UpdateUserDto } from './dtos/update.dto';
 
 @Controller('user')
 export class UserController {
@@ -68,11 +69,15 @@ export class UserController {
 
     @UseGuards(JwtAuthGuard)
     @Patch('update/info')
-    updateInformation(
+    async updateInformation(
+        @Body(ValidationPipe) updateUserDto: UpdateUserDto,
         @GetUser() user: UserEntity,
-        @Res() res: Response // INFO: Use to update the cookies.
+        @Res() res: Response
     ) {
         this.logger.log(`PATCH ${this.API_PATH}/update/info`);
+        const fullData: FullUserData = await this.userService.updateInfo(updateUserDto, user);
+        res.cookie('refreshToken', fullData.refreshToken, refreshTokenCookieConfig );
+        res.status(HttpStatus.OK).json(omitObjectKeys(fullData, ['refreshToken']));
     }
 
     @UseGuards(JwtAuthGuard)
