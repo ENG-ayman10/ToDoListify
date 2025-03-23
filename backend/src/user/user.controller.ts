@@ -1,18 +1,26 @@
 import { 
+    Body,
     Controller,
     Delete,
     Get,
+    HttpStatus,
     Logger,
     Patch,
     Post,
     Req,
     Res,
-    UseGuards
+    UseGuards,
+    ValidationPipe
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { JwtAuthGuard } from 'src/auth/jwt.guard';
 import { GetUser } from './decorators/get-user.decorator';
 import { UserEntity } from './entities/user.entity';
+import { UserService } from './user.service';
+import { CreateUserDto } from './dtos/create.dto';
+import { FullUserData } from './interfaces';
+import { refreshTokenCookieConfig } from 'src/config/cookies.config';
+import { omitObjectKeys } from 'src/utils/omit.util';
 
 @Controller('user')
 export class UserController {
@@ -20,14 +28,18 @@ export class UserController {
     private readonly API_PATH = '/api/v1/user';
     
     constructor(
-        // TODO: Add User Service.
+        private userService: UserService
     ) {}
 
     @Post('register')
-    create(
+    async create(
+        @Body(ValidationPipe) createUserDto: CreateUserDto,
         @Res() res: Response // INFO: Use to set the cookies.
     ) {
         this.logger.log(`POST ${this.API_PATH}/register`);
+        const fullData: FullUserData = await this.userService.create(createUserDto);
+        res.cookie('refreshToken', fullData.refreshToken, refreshTokenCookieConfig );
+        res.status(HttpStatus.CREATED).json(omitObjectKeys(fullData, ['refreshToken']));
     }
 
     @Post('login')
