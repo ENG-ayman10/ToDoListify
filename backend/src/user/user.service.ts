@@ -1,4 +1,12 @@
-import { HttpException, HttpStatus, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { 
+    HttpException,
+    HttpStatus,
+    Injectable,
+    InternalServerErrorException,
+    Logger,
+    NotFoundException,
+    UnauthorizedException
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
@@ -9,6 +17,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtPayloadInterface } from 'src/auth/interfaces';
 import { omitObjectKeys } from 'src/utils/omit.util';
 import * as bcrypt from 'bcrypt';
+import { LoginDto } from './dtos/login.dto';
 
 @Injectable()
 export class UserService {
@@ -35,6 +44,17 @@ export class UserService {
                 throw new HttpException(`Username/Email is already registered!`, HttpStatus.FOUND);
             throw new InternalServerErrorException();
         }
+    }
+
+    async login( loginDto: LoginDto ): Promise<FullUserData> {
+        const user = await this.userRepository.findOne({ where: {username: loginDto.username}});
+        if (!user) throw new NotFoundException(`User '${loginDto.username}' NOT found!`);
+        const loginHashPassword = await bcrypt.hash(loginDto.password, user.salt);
+        if ( 
+            user.password !== loginHashPassword 
+        ) throw new UnauthorizedException("Invalid password!");
+        this.logger.log(`User '${user.username}' logging.`);
+        return this.formatUserData(user);
     }
 
     private formatUserData( user: UserEntity ): FullUserData {

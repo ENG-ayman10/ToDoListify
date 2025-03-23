@@ -21,6 +21,7 @@ import { CreateUserDto } from './dtos/create.dto';
 import { FullUserData } from './interfaces';
 import { refreshTokenCookieConfig } from 'src/config/cookies.config';
 import { omitObjectKeys } from 'src/utils/omit.util';
+import { LoginDto } from './dtos/login.dto';
 
 @Controller('user')
 export class UserController {
@@ -34,7 +35,7 @@ export class UserController {
     @Post('register')
     async create(
         @Body(ValidationPipe) createUserDto: CreateUserDto,
-        @Res() res: Response // INFO: Use to set the cookies.
+        @Res() res: Response
     ) {
         this.logger.log(`POST ${this.API_PATH}/register`);
         const fullData: FullUserData = await this.userService.create(createUserDto);
@@ -43,10 +44,14 @@ export class UserController {
     }
 
     @Post('login')
-    login(
-        @Res() res: Response // INFO: Use to set the cookies.
+    async login(
+        @Body(ValidationPipe) loginDto: LoginDto,
+        @Res() res: Response
     ) {
         this.logger.log(`POST ${this.API_PATH}/login`);
+        const fullData: FullUserData = await this.userService.login(loginDto);
+        res.cookie('refreshToken', fullData.refreshToken, refreshTokenCookieConfig );
+        res.status(HttpStatus.OK).json(omitObjectKeys(fullData, ['refreshToken']));
     }
 
     @Get('refresh')
