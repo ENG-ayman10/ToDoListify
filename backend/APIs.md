@@ -272,7 +272,7 @@ This file contains a detailed description of the API design.
     ```json
     {
         "oldPassword": "Mohaned2023+",
-        "newPassword": "Mohaned.1.3+1",
+        "Password": "Mohaned.1.3+1",
         "confirmation": "Mohaned.1.3+1"
     }
     ```
