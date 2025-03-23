@@ -1,5 +1,6 @@
 import { 
     IsEmail,
+    IsLowercase,
     IsNotEmpty,
     IsString,
     Matches,
@@ -24,6 +25,7 @@ export class CreateUserDto {
 
     @IsString()
     @IsNotEmpty()
+    @IsLowercase()
     @MinLength(5)
     @MaxLength(50)
     @Matches(
