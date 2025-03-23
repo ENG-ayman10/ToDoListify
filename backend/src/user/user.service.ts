@@ -57,6 +57,18 @@ export class UserService {
         return this.formatUserData(user);
     }
 
+    async refresh(refreshToken: string|undefined ): Promise<FullUserData> {
+        if (!refreshToken) throw new UnauthorizedException();
+        try {
+            const decoded: JwtPayloadInterface = this.jwtService.verify(refreshToken, {ignoreExpiration: false});
+            const user = await this.userRepository.findOne({where: {username: decoded.username} });
+            if (!user) throw new UnauthorizedException();
+            return this.formatUserData(user);
+        } catch( _ ) {
+            throw new UnauthorizedException();
+        }
+    }
+
     private formatUserData( user: UserEntity ): FullUserData {
         const payload: JwtPayloadInterface = { id: user.id, username: user.username };
         const expiresIn: string = this.configService.get<string>("TODOLISTIFY_JWT_LONG_EXPIRESIN", '3d');

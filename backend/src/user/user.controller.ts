@@ -55,11 +55,15 @@ export class UserController {
     }
 
     @Get('refresh')
-    refresh(
-        @Req() req: Request, // INFO: Use to get the cookies.
-        @Res() res: Response // INFO: Use to set the cookies.
+    async refresh(
+        @Req() req: Request,
+        @Res() res: Response
     ) {
         this.logger.log(`GET ${this.API_PATH}/refresh`);
+        const { refreshToken } = req.cookies;
+        const fullData: FullUserData = await this.userService.refresh(refreshToken);
+        res.cookie('refreshToken', fullData.refreshToken, refreshTokenCookieConfig );
+        res.status(HttpStatus.OK).json(omitObjectKeys(fullData, ['refreshToken']));
     }
 
     @UseGuards(JwtAuthGuard)
