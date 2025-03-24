@@ -53,7 +53,10 @@ export class UserService {
 
     async login( loginDto: LoginDto ): Promise<FullUserData> {
         const user = await this.userRepository.findOne({ where: {username: loginDto.username}});
-        if (!user) throw new NotFoundException(`User '${loginDto.username}' NOT found!`);
+        if (
+            !user ||
+            user.state === UserState.INACTIVE
+        ) throw new NotFoundException(`User '${loginDto.username}' NOT found!`);
         const loginHashPassword = await bcrypt.hash(loginDto.password, user.salt);
         if ( 
             user.password !== loginHashPassword 
