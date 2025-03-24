@@ -110,8 +110,10 @@ export class UserController {
     @Post('logout')
     logout(
         @GetUser() user: UserEntity,
-        @Res() res: Response // INFO: Use to delete the cookies.
+        @Res() res: Response
     ) {
         this.logger.log(`PATCH ${this.API_PATH}/logout`);
+        res.cookie("refreshToken", "", {maxAge: 1000, httpOnly: true});
+        res.status(200).send();
     }
 }
