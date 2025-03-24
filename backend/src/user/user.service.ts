@@ -21,6 +21,8 @@ import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dtos/login.dto';
 import { UpdateUserDto } from './dtos/update.dto';
 import { UpdatePasswordDto } from './dtos/update-password.dto';
+import { DeleteDto } from './dtos/delete.dto';
+import { UserState } from './enums/user-state.enum';
 
 @Injectable()
 export class UserService {
@@ -88,6 +90,15 @@ export class UserService {
         const oldPasswordHash = await bcrypt.hash(updatePasswordDto.oldPassword, user.salt);
         if ( oldPasswordHash !== user.password ) throw new UnauthorizedException();
         user.password = await bcrypt.hash(updatePasswordDto.password, user.salt);
+        await user.save();
+        return;
+    }
+
+    async delete(deleteDto: DeleteDto, user: UserEntity): Promise<void> {
+        if (
+            (await bcrypt.hash(deleteDto.password, user.salt)) !== user.password
+        ) throw new UnauthorizedException();
+        user.state = UserState.INACTIVE;
         await user.save();
         return;
     }
