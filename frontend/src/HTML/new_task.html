@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/output.css" />
+    <title>New Task</title>
+  </head>
+  <body class="h-screen">
+    <div class="h-full">
+      <header
+        class="h-[10%] w-full bg-primary-color border-3 border-t-0 rounded-b-[52px] border-black px-8 shadow-[1px_5px_4px_0px_#00000040] md:shadow-none md:h-2/12 md:rounded-br-[52px] md:rounded-b-none md:border-b-2 md:border-r-2 md:border-l-0"
+      >
+        <div class="h-full flex items-center space-x-5">
+          <div class="relative">
+            <h1
+              class="font-inter-900-italic text-[36px] md:text-5xl text-black hidden md:block"
+            >
+              TO DO Listify
+            </h1>
+            <span
+              class="hidden absolute left-2 w-[265px] rounded-r-2xl rounded-l-2xl h-1 bg-white md:block"
+            ></span>
+          </div>
+          <span class="h-8 bg-white rounded-lg w-2 mt-4 hidden md:block"></span>
+          <div class="flex items-center space-x-4 relative">
+            <!-- Circle -->
+            <div
+              class="size-10 bg-black rounded-full -ml-[33px] text-primary-color flex justify-center items-center md:hidden"
+            >
+              <a href="" class="-translate-y-1 text-3xl">&larr;</a
+              >
+            </div>
+            <h1
+              class="font-inter-900-italic text-[36px] md:text-5xl text-black md:mt-5"
+            >
+              New Task
+            </h1>
+          </div>
+        </div>
+      </header>
+
+      <div class="h-[90%] w-full flex md:h-5/6">
+        <aside
+          class="h-full w-[7%] bg-primary-color rounded-br-[52px] hidden md:block"
+        >
+          <div class="w-full h-full flex flex-col items-center pt-5 space-y-6">
+            <a href="settings.html"
+              class="bg-white size-18 flex items-end border-3 justify-center rounded-full"
+            >
+              <img src="/Images/icons/person.png" alt="" class="h-14 w-9" />
+            </a>
+            <a href="#"
+              class="bg-white h-18 w-26 ml-5 rounded-l-full flex items-center pl-3"
+            >
+              <img src="/Images/icons/home.png" alt="" />
+            </a>
+            <a href="search.html"
+              class="bg-white size-18 flex items-center border-3 justify-center rounded-full"
+            >
+              <img src="/Images/icons/search.png" alt="" />
+            </a>
+            <a href="#"
+              class="bg-white size-18 flex items-center border-3 justify-center rounded-full"
+            >
+              <img src="/Images/icons/plus.png" alt="" />
+            </a>
+          </div>
+        </aside>
+
+        <main class="h-full w-full">
+          <form
+            action=""
+            class="flex flex-col justify-center items-center space-y-8 mt-5 md:mt-0 md:block md:ml-42"
+          >
+            <div class="flex flex-col mt-8">
+              <label
+                for="title"
+                class="text-shadow font-inter-900-italic text-4xl h-11 w-24 pl-16"
+                >Title</label
+              >
+              <input
+                type="text"
+                id="title"
+                class="w-96 h-36 rounded-[52px] bg-primary-color shadow-[1px_5px_4px_0px_#00000040] md:w-[794px]"
+              />
+            </div>
+            <div class="flex flex-col">
+              <label
+                for="title"
+                class="text-shadow font-inter-900-italic text-4xl h-11 w-24 pl-16"
+                >Describe</label
+              >
+              <input
+                type="text"
+                id="title"
+                class="w-96 h-36 rounded-[52px] bg-primary-color shadow-[1px_5px_4px_0px_#00000040] md:w-[1143px]"
+              />
+            </div>
+            <!-- Buttons -->
+            <div
+              class="grid grid-cols-2 justify-items-center gap-x-6 gap-y-10 md:gap-y-6 "
+            >
+              <button
+                class="w-44 h-14 rounded-full bg-primary-color text-white font-inter-900-italic text-2xl border-white border-e-3 border-b-3 shadow-[1px_5px_4px_0px_#00000040] cursor-pointer hover:text-black active:scale-95 md:w-64 md:h-16"
+              >
+                Status
+              </button>
+
+              <button
+                class="w-44 h-14 rounded-full bg-primary-color text-white font-inter-900-italic text-2xl border-white border-e-3 border-b-3 shadow-[1px_5px_4px_0px_#00000040] cursor-pointer hover:text-black active:scale-95 md:w-64 md:h-16"
+              >
+                Priority
+              </button>
+              <button type="submit"
+                class="w-40 h-12 rounded-full bg-black text-white font-inter-600 text-2xl col-span-2 hover:text-primary-color md:col-span-2 justify-self-center cursor-pointer active:scale-95 md:w-64 md:h-16 md:text-3xl"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
