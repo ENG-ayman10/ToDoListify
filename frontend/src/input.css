@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@font-face {
+  font-family: 'inter-900';
+  src: url('./Fonts/Inter_28pt-Black.ttf');
+}
+@font-face {
+  font-family: 'inter-900-italic';
+  src: url('./Fonts/Inter_28pt-BlackItalic.ttf');
+}
+@font-face {
+  font-family: 'inter-600-italic';
+  src: url('./Fonts/Inter_28pt-SemiBoldItalic.ttf');
+}
+@font-face {
+  font-family: 'inter-600';
+  src: url('./Fonts/Inter_28pt-SemiBold.ttf');
+}
+@theme {
+    --color-primary-color: #EFB700;
+
+    --font-inter-900: "inter-900";
+    --font-inter-900-italic: "inter-900-italic";
+    --font-inter-600: "inter-600";
+    --font-inter-600-italic: "inter-600-italic";
+  }
+
+
+  @layer utilities {
+    .text-shadow {
+      text-shadow: 1px 5px 4px rgba(0, 0, 0, 0.25);
+    }
+  } 
+
+
+
+
