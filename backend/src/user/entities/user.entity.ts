@@ -2,10 +2,12 @@ import {
     BaseEntity, 
     Column,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import { UserState } from "../enums/user-state.enum";
+import { TaskEntity } from "src/task/entities/task.entity";
 
 
 @Entity( { name: "users" })
@@ -36,4 +38,7 @@ export class UserEntity extends BaseEntity {
 
     @UpdateDateColumn()
     update_at: Date
+
+    @OneToMany( () => TaskEntity, (task) => task.user )
+    tasks: TaskEntity[];
 }

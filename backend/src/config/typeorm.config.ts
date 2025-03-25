@@ -1,5 +1,6 @@
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModuleAsyncOptions } from "@nestjs/typeorm";
+import { TaskEntity } from "src/task/entities/task.entity";
 import { UserEntity } from "src/user/entities/user.entity";
 
 /**
@@ -15,7 +16,7 @@ export const typeormConfig: TypeOrmModuleAsyncOptions = {
         username: configService.get<string>("TODOLISTIFY_DATABASE_USERNAME"),
         password: configService.get<string>("TODOLISTIFY_DATABASE_PASSWORD"),
         database: configService.get<string>("TODOLISTIFY_DATABASE_NAME"),
-        entities: [UserEntity],
+        entities: [UserEntity, TaskEntity],
         synchronize: configService.get<string>("TODOLISTIFY_DATABASE_SYNC") === "true"
     })
 }
