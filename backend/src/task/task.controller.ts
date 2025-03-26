@@ -33,7 +33,7 @@ export class TaskController {
         @GetUser() user: UserEntity
     ) {
         this.logger.log(`GET '${this.API_PATH}'`);
-        return;
+        return this.taskService.getAll(user);
     }
     
     @Post('create')
