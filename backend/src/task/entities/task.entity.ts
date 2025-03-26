@@ -22,7 +22,7 @@ export class TaskEntity extends BaseEntity {
     body: string;
 
     @Column({enum: TaskState, default: TaskState.TO_DO})
-    status: TaskState;
+    state: TaskState;
 
     @Column({enum: TaskPriority, default: TaskPriority.MEDIUM})
     priority: TaskPriority;
