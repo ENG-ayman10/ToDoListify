@@ -1,4 +1,5 @@
 import { 
+    Body,
     Controller, 
     Delete, 
     Get, 
@@ -7,12 +8,14 @@ import {
     ParseIntPipe, 
     Patch, 
     Post, 
-    UseGuards
+    UseGuards,
+    ValidationPipe
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt.guard';
 import { GetUser } from 'src/user/decorators/get-user.decorator';
 import { UserEntity } from 'src/user/entities/user.entity';
 import { TaskService } from './task.service';
+import { CreateTaskDto } from './dtos/create.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('task')
@@ -35,10 +38,11 @@ export class TaskController {
     
     @Post('create')
     create(
+        @Body(ValidationPipe) createTaskDto: CreateTaskDto,
         @GetUser() user: UserEntity
     ) {
         this.logger.log(`POST '${this.API_PATH}/create'`);
-        return;
+        return this.taskService.create(createTaskDto, user);
     }
 
     @Patch('update/:id')
