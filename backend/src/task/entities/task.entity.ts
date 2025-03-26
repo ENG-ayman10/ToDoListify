@@ -3,7 +3,8 @@ import {
     Column,
     Entity,
     ManyToOne,
-    PrimaryGeneratedColumn
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
 } from "typeorm";
 import { TaskState } from "../enums/state.enum";
 import { TaskPriority } from "../enums/priority.enum";
@@ -25,6 +26,12 @@ export class TaskEntity extends BaseEntity {
 
     @Column({enum: TaskPriority, default: TaskPriority.MEDIUM})
     priority: TaskPriority;
+
+    @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+    create_at: Date;
+
+    @UpdateDateColumn()
+    update_at: Date
 
     @ManyToOne(() => UserEntity, (user) => user.tasks )
     user: UserEntity;
