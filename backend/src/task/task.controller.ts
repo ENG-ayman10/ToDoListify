@@ -16,6 +16,7 @@ import { GetUser } from 'src/user/decorators/get-user.decorator';
 import { UserEntity } from 'src/user/entities/user.entity';
 import { TaskService } from './task.service';
 import { CreateTaskDto } from './dtos/create.dto';
+import { UpdateTaskDto } from './dtos/update.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('task')
@@ -48,10 +49,11 @@ export class TaskController {
     @Patch('update/:id')
     update(
         @Param('id', ParseIntPipe) id: number,
+        @Body(ValidationPipe) updateTaskDto: UpdateTaskDto,
         @GetUser() user: UserEntity
     ) {
         this.logger.log(`PATCH '${this.API_PATH}/update/${id}'`);
-        return;
+        return this.taskService.update(id, updateTaskDto, user);
     }
 
     @Delete('delete/:id')
