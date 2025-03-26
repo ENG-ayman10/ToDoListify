@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/output.css" />
+    <title>Sign In</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      main {
+        flex-grow: 1;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[url('/Images/log_in_up/back2.png')] bg-cover bg-center bg-fixed"
+  >
+    <nav class="relative p-6 w-full">
+      <div class="flex items-center justify-between w-full px-6">
+        <div
+          class="circle p-2 flex items-center justify-center w-[50px] h-[50px] bg-black rounded-full hover:bg-[#efb700] transition duration-300"
+        >
+          <a
+            href="javascript:history.back()"
+            class="back-btn text-[35px] mb-1 font-bold text-[#efb700] hover:text-white transition duration-300"
+            >&larr;</a
+          >
+        </div>
+        <a
+          href="/src/HTML/register.html"
+          class="register-link p-3 px-6 text-[20px] md:text-[25px] font-bold text-black hover:text-[#efb700] transition duration-300"
+          >Register</a
+        >
+      </div>
+    </nav>
+
+    <main class="flex flex-col w-full md:relative relative">
+      <h1
+        class="font-inter-900-italic text-4xl title mt-4 mb-8 font-bold md:text-[76px] leading-[1] text-center md:text-left md:ml-[65px]"
+      >
+        Sign In
+      </h1>
+      <div
+        class="w-full max-w-4xl px-6 py-11 rounded-t-[50px] z-10 md:bg-transparent bg-[#efb700] h-auto"
+      >
+        <h2
+          class="font-inter-900-italic text-4xl font-bold text-black text-center md:text-black md:hidden"
+        >
+          Welcome Back!
+        </h2>
+        <form action="" class="w-full">
+          <div
+            class="flex flex-col md:flex-row md:justify-between w-full md:ml-20"
+          >
+            <div class="input-container p-4 md:p-[30px] mt-[20px] md:mt-[50px]">
+              <label class="font-inter-900 ml-4 md:hidden">Username:</label>
+              <input
+                id="username"
+                type="text"
+                placeholder="Username"
+                required
+                class="input-field w-full bg-white text-black md:w-[500px] h-[75px] p-4 md:bg-[#efb700] border-[5px] border-white shadow-lg rounded-full md:text-white text-2xl placeholder-white font-bold outline-none"
+              />
+            </div>
+            <div class="input-container p-4 md:p-[30px] mt-[20px] md:mt-[50px]">
+              <label class="font-inter-900 ml-4 md:hidden">Password:</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                required
+                class="input-field w-full bg-white text-black md:w-[500px] h-[75px] p-4 md:bg-[#efb700] border-[5px] border-white shadow-lg rounded-full md:text-white text-2xl placeholder-white font-bold outline-none"
+              />
+            </div>
+          </div>
+          <div class="flex justify-center md:justify-start md:ml-[560px] mt-4">
+            <button
+              id="signInBtn"
+              type="submit"
+              class="sign-in-btn w-[180px] h-[80px] flex items-center justify-center text-[28px] font-bold bg-black text-white py-3 px-8 rounded-full shadow-lg border-none cursor-pointer relative z-50 hover:text-[#efb700] transition duration-400"
+            >
+              Sign In
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer
+      class="wave-footer w-full mt-auto relative hidden md:fixed md:bottom-0 md:left-0 md:block"
+    >
+      <svg
+        viewBox="0 0 1440 320"
+        class="wave-back absolute bottom-0 w-full opacity-50"
+      >
+        <path
+          fill="#FFD766"
+          fill-opacity="1"
+          d="M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,160C672,160,768,192,864,213.3C960,235,1056,245,1152,240C1248,235,1344,213,1392,202.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+        />
+      </svg>
+      <svg
+        viewBox="0 0 1440 320"
+        class="wave-front absolute bottom-0 w-full -mt-[60px]"
+      >
+        <path
+          fill="#F7A900"
+          fill-opacity="1"
+          d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,213.3C672,224,768,224,864,202.7C960,181,1056,139,1152,138.7C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+        />
+      </svg>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/scSignin.js"></script>
+  </body>
+</html>
