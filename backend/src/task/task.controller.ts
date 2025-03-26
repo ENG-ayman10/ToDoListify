@@ -62,6 +62,6 @@ export class TaskController {
         @GetUser() user: UserEntity
     ) {
         this.logger.log(`DELETE '${this.API_PATH}/delete/${id}'`);
-        return;
+        return this.taskService.delete(id, user);
     }
 }

@@ -44,4 +44,10 @@ export class TaskService {
         Object.assign(task, updateTaskDto);
         return omitObjectKeys(await task.save(), ['user']) as TaskEntity;
     }
+
+    async delete(id: number, user: UserEntity): Promise<void> {
+        const {affected} = await this.taskRepository.delete({id, userId: user.id});
+        if (affected < 1 ) throw new NotFoundException(`Task with ID '${id}' NOT found!`);
+        return;
+    }
 }
