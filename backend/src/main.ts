@@ -9,6 +9,10 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
   app.use(cookiesParser());
   const configService: ConfigService = app.get(ConfigService);
+  app.enableCors({
+    origin: configService.get<string>("TODOLISTIFY_FRONTEND_URL", "http://localhost:8080/"),
+    credentials: true
+  });
   const PORT: number = Number.parseInt(configService.get<string>("TODOLISTIFY_PORT"))
   const logger: Logger = new Logger('bootstrap', {timestamp: true});
   logger.log(`App running on ${PORT}`);
