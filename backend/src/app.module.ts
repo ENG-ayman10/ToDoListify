@@ -6,6 +6,9 @@ import { envConfig } from './config/env.config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { TaskModule } from './task/task.module';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { rateLimitConfig } from './config/rate-limit.config';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -13,9 +16,12 @@ import { TaskModule } from './task/task.module';
     TypeOrmModule.forRootAsync(typeormConfig),
     AuthModule,
     UserModule,
-    TaskModule
+    TaskModule,
+    ThrottlerModule.forRoot(rateLimitConfig)
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {provide: APP_GUARD, useClass: ThrottlerGuard}
+  ],
 })
 export class AppModule {}
