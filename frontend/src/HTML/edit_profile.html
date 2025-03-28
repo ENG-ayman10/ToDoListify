@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Profile</title>
+    <link
+      rel="stylesheet"
+      href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+    />
     <link rel="stylesheet" href="/src/output.css" />
   </head>
   <body class="h-screen">
@@ -83,11 +87,13 @@
                 required
                 class="input-field placeholder:opacity-0 w-full bg-[#efb700] text-black md:h-[70px] p-[5px] md:bg-[#efb700] border-[5px] border-white shadow-[10px_10px_10px_0px_#00000040] rounded-full md:text-white text-[25px] placeholder-white font-bold outline-none md:w-full md:placeholder:opacity-100"
               />
-              <img
-                src="/Images/Polygon 1.png"
-                alt=""
-                class="hidden absolute left-36 bottom-1 transform -translate-y-1/2 w-5 md:block"
-              />
+              <span>
+                <img
+                  src="/Images/Polygon 1.png"
+                  alt=""
+                  class="hidden absolute left-36 bottom-1 transform -translate-y-1/2 w-5 md:block"
+                />
+              </span>
             </div>
 
             <!-- Email -->
@@ -100,11 +106,13 @@
                 required
                 class="input-field placeholder:opacity-0 w-full bg-[#efb700] text-black md:h-[70px] p-[5px] md:bg-[#efb700] border-[5px] border-white shadow-[10px_10px_10px_0px_#00000040] rounded-full md:text-white text-[25px] placeholder-white font-bold outline-none md:w-full md:placeholder:opacity-100"
               />
-              <img
-                src="/Images/Polygon 1.png"
-                alt=""
-                class="hidden absolute left-36 bottom-1 transform -translate-y-1/2 w-5 md:block"
-              />
+              <span>
+                <img
+                  src="/Images/Polygon 1.png"
+                  alt=""
+                  class="hidden absolute left-36 bottom-1 transform -translate-y-1/2 w-5 md:block"
+                />
+              </span>
             </div>
 
             <!-- Username -->
@@ -117,11 +125,13 @@
                 required
                 class="input-field placeholder:opacity-0 w-full bg-[#efb700] text-black md:h-[70px] p-[5px] md:bg-[#efb700] border-[5px] border-white shadow-[10px_10px_10px_0px_#00000040] rounded-full md:text-white text-[25px] placeholder-white font-bold outline-none md:w-full md:placeholder:opacity-100"
               />
-              <img
-                src="/Images/Polygon 1.png"
-                alt=""
-                class="hidden absolute left-36 bottom-1 transform -translate-y-1/2 w-5 md:block"
-              />
+              <span>
+                <img
+                  src="/Images/Polygon 1.png"
+                  alt=""
+                  class="hidden absolute left-36 bottom-1 transform -translate-y-1/2 w-5 md:block"
+                />
+              </span>
             </div>
 
             <!-- Change Password -->
@@ -131,21 +141,11 @@
                 class="flex items-center gap-2 w-[350px] h-[60px] bg-[#efb700] text-white font-bold text-[19px] py-2 px-20 rounded-full shadow-md hover:bg-[#d9a600] transition"
               >
                 Change Password
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  width="20"
-                  height="20"
-                >
-                  <path
-                    d="M17 8h-1V6a4 4 0 00-8 0v2H7a1 1 0 00-1 1v11a1 1 0 001 1h10a1 1 0 001-1V9a1 1 0 00-1-1zm-6 7.73V17a1 1 0 002 0v-1.27a2 2 0 10-2 0zM9 8V6a3 3 0 016 0v2H9z"
-                  />
-                </svg>
+                <i class="fa-solid fa-lock text-black text-[20px]"></i>
               </button>
             </div>
 
-            <!-- Pop-up window-->
+            <!-- [First] Modal (Correct Password)-->
             <div
               id="modal"
               class="hidden fixed inset-0 items-center justify-center bg-black bg-opacity-50"
@@ -161,23 +161,8 @@
                   ✖
                 </button>
 
-                <!-- Lock icon-->
                 <div class="flex justify-center mb-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="black"
-                    width="40"
-                    height="40"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17 8h-1V6a4 4 0 00-8 0v2H7a1 1 0 00-1 1v11a1 1 0 001 1h10a1 1 0 001-1V9a1 1 0 00-1-1zm-6 7.73V17a1 1 0 002 0v-1.27a2 2 0 10-2 0zM9 8V6a3 3 0 016 0v2H9z"
-                    />
-                  </svg>
+                  <i class="fas fa-lock text-black text-[40px]"></i>
                 </div>
 
                 <h2 class="text-xl font-bold text-black italic">
@@ -195,33 +180,81 @@
                     class="w-full px-4 py-2 border rounded-full bg-[#efb700] text-white focus:outline-none"
                     placeholder="********"
                   />
-                  <span
+                  <button
                     id="togglePassword"
                     class="absolute right-3 top-3 cursor-pointer"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="white"
-                      viewBox="0 0 24 24"
-                      width="20"
-                      height="20"
-                    >
-                      <path
-                        d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-8c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"
-                      />
-                    </svg>
-                  </span>
+                    <i id="eyeIcon" class="fa-solid fa-eye-slash"></i>
+                  </button>
                 </div>
 
                 <!-- Next Botton -->
                 <button
                   id="nextStep"
+                  type="button"
                   class="mt-4 bg-black text-white px-6 py-2 rounded-full shadow-lg hover:bg-gray-800 transition"
                 >
                   Next
                 </button>
               </div>
             </div>
+            <!-- Second Modal (New Password) -->
+            <div
+              id="newPasswordModal"
+              class="hidden fixed inset-0 items-center justify-center bg-black bg-opacity-50"
+            >
+              <div
+                class="bg-white p-6 rounded-lg shadow-lg w-[400px] text-center relative"
+              >
+                <!-- Cancel button (X) -->
+                <button
+                  id="closeNewPasswordModal"
+                  class="absolute top-2 right-2 text-gray-600 hover:text-red-500"
+                >
+                  ✖
+                </button>
+
+                <div class="flex justify-center mb-4">
+                  <i class="fas fa-key text-black text-[40px]"></i>
+                </div>
+
+                <h2 class="text-xl font-bold text-black italic">
+                  Set <span class="text-[#efb700]">New Password</span>
+                </h2>
+
+                <!-- New Password Input -->
+                <label for="newPassword" class="block text-gray-700 mt-4"
+                  >New Password:</label
+                >
+                <input
+                  type="password"
+                  id="newPassword"
+                  class="w-full px-4 py-2 border rounded-full bg-[#efb700] text-white focus:outline-none"
+                  placeholder="********"
+                />
+
+                <!-- Confirm Password Input -->
+                <label for="confirmPassword" class="block text-gray-700 mt-4"
+                  >Confirm Password:</label
+                >
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  class="w-full px-4 py-2 border rounded-full bg-[#efb700] text-white focus:outline-none"
+                  placeholder="********"
+                />
+
+                <!-- Submit Button -->
+                <button
+                  id="submitNewPassword"
+                  type="button"
+                  class="mt-4 bg-black text-white px-6 py-2 rounded-full shadow-lg hover:bg-gray-800 transition"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+
             <!-- Save Button -->
             <div class="flex items-center justify-center">
               <button
@@ -235,6 +268,7 @@
         </main>
       </div>
     </div>
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="/js/edit_profile.js"></script>
   </body>
 </html>

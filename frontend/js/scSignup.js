@@ -32,6 +32,13 @@ document.getElementById("signup").addEventListener("click", function (event) {
       text: "Please enter a valid email address.",
       confirmButtonColor: "#d33",
     });
+  } else if (password.length < 8) {
+    Swal.fire({
+      icon: "warning",
+      title: "Weak Password ⚠️",
+      text: "Your password must be at least 8 characters long.",
+      confirmButtonColor: "#efb700",
+    });
   } else {
     Swal.fire({
       icon: "success",

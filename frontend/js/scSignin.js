@@ -1,5 +1,5 @@
 const validUsername = "admin";
-const validPassword = "1234";
+const validPassword = "123456789";
 
 document
   .getElementById("signInBtn")
