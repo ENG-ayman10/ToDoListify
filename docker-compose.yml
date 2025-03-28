@@ -1,0 +1,71 @@
+version: '3.3'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - todolistify-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    expose:
+      - "80"
+    networks:
+      - todolistify-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    expose:
+      - "3000"
+    environment:
+    ## APP
+    - TODOLISTIFY_PORT=${TODOLISTIFY_PORT:-3000}
+    - TODOLISTIFY_FRONTEND_URL=${TODOLISTIFY_FRONTEND_URL:-"*"}
+    ## Database
+    - TODOLISTIFY_DATABASE_HOST=${TODOLISTIFY_DATABASE_HOST:-postgres}
+    - TODOLISTIFY_DATABASE_PORT=${TODOLISTIFY_DATABASE_PORT:-5432}
+    - TODOLISTIFY_DATABASE_USERNAME=${TODOLISTIFY_DATABASE_USERNAME:-postgres}
+    - TODOLISTIFY_DATABASE_PASSWORD=${TODOLISTIFY_DATABASE_PASSWORD:-postgres}
+    - TODOLISTIFY_DATABASE_NAME=${TODOLISTIFY_DATABASE_NAME:-to_do_listify}
+    - TODOLISTIFY_DATABASE_SYNC=${TODOLISTIFY_DATABASE_SYNC:-true}
+    ## JWT
+    - TODOLISTIFY_JWT_SECRET=${TODOLISTIFY_JWT_SECRET:-password123}
+    - TODOLISTIFY_JWT_EXPIRESIN=${TODOLISTIFY_JWT_EXPIRESIN:-3h}
+    - TODOLISTIFY_JWT_LONG_EXPIRESIN=${TODOLISTIFY_JWT_LONG_EXPIRESIN:-3d}
+    ## Password
+    - TODOLISTIFY_PASSWORD_SALT_RANGE=${TODOLISTIFY_PASSWORD_SALT_RANGE:-12}
+    depends_on:
+      - postgres
+    networks:
+      - todolistify-network
+
+  postgres:
+    image: postgres:16-alpine
+    expose:
+      - "5432"
+    environment:
+      - POSTGRES_USER=${TODOLISTIFY_DATABASE_USERNAME:-postgres}
+      - POSTGRES_PASSWORD=${TODOLISTIFY_DATABASE_PASSWORD:-postgres}
+      - POSTGRES_DB=${TODOLISTIFY_DATABASE_NAME:-to_do_listify}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - todolistify-network
+
+networks:
+  todolistify-network:
+    driver: bridge
+
+volumes:
+  postgres_data: 
