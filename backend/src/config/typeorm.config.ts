@@ -9,14 +9,18 @@ import { UserEntity } from "src/user/entities/user.entity";
 export const typeormConfig: TypeOrmModuleAsyncOptions = {
     imports: [ConfigModule],
     inject: [ConfigService],
-    useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get<string>("TODOLISTIFY_DATABASE_HOST"),
-        port: Number.parseInt(configService.get<string>("TODOLISTIFY_DATABASE_PORT")),
-        username: configService.get<string>("TODOLISTIFY_DATABASE_USERNAME"),
-        password: configService.get<string>("TODOLISTIFY_DATABASE_PASSWORD"),
-        database: configService.get<string>("TODOLISTIFY_DATABASE_NAME"),
-        entities: [UserEntity, TaskEntity],
-        synchronize: configService.get<string>("TODOLISTIFY_DATABASE_SYNC") === "true"
-    })
+    useFactory: (configService: ConfigService) => {
+        const isProduction = configService.get<string>("NODE_ENV") === "production";
+        return {
+            type: 'postgres',
+            host: configService.get<string>("TODOLISTIFY_DATABASE_HOST"),
+            port: Number.parseInt(configService.get<string>("TODOLISTIFY_DATABASE_PORT")),
+            username: configService.get<string>("TODOLISTIFY_DATABASE_USERNAME"),
+            password: configService.get<string>("TODOLISTIFY_DATABASE_PASSWORD"),
+            database: configService.get<string>("TODOLISTIFY_DATABASE_NAME"),
+            entities: [UserEntity, TaskEntity],
+            synchronize: configService.get<string>("TODOLISTIFY_DATABASE_SYNC") === "true",
+            ssl: isProduction ? { rejectUnauthorized: false } : false
+        }
+    }
 }

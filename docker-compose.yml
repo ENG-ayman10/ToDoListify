@@ -30,6 +30,7 @@ services:
       - "3000"
     environment:
     ## APP
+    - NODE_ENV=production
     - TODOLISTIFY_PORT=${TODOLISTIFY_PORT:-3000}
     - TODOLISTIFY_FRONTEND_URL=${TODOLISTIFY_FRONTEND_URL:-"*"}
     ## Database
