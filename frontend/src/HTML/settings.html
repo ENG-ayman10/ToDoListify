@@ -35,9 +35,9 @@
         </div>
       </header>
 
-      <div class="h-[90%] w-full flex md:h-5/6">
+      <div class="h-[78%] w-full flex md:h-5/6">
         <aside
-          class="h-full w-[7%] bg-primary-color rounded-br-[52px] hidden md:block"
+          class="h-full w-[12%] bg-primary-color rounded-br-[52px] hidden md:block lg:w-[7%]"
         >
           <div class="w-full h-full flex flex-col items-center pt-5 space-y-6">
             <a href="settings.html"
@@ -63,29 +63,30 @@
           </div>
         </aside>
 
-        <main class="h-full w-full pt-8 p-12 pl-16 md:pt-12">
+        <main class="h-full w-full pt-4 p-12 md:pl-16 md:pt-12">
           <div class="flex flex-col items-center gap-x-10 md:flex-row">
-            <div class="size-48 rounded-full border-black border bg-primary-color relative shadow-[1px_5px_4px_0px_#00000040]">
-              <img src="/Images/icons/person.png" alt="" class="h-48 w-32 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-5/12">
+            <div class="size-32 rounded-full border-black border bg-primary-color relative shadow-[1px_5px_4px_0px_#00000040] md:size-48">
+              <img src="/Images/icons/person.png" alt="" class="h-32 absolute left-1/2 -translate-x-1/2 top-1/2 md:h-48 md:w-32 -translate-y-5/12">
             </div>
             <div>
-              <h3 class="font-inter-900 italic text-2xl w-96 h-12 flex justify-center items-center ">Mohammed Abdullah</h3>
-              <h3 class="font-inter-900 italic text-2xl w-96 h-12 flex justify-center items-center bg-primary-color rounded-full">Mohammed@gmail.com</h3>
+              <h3 class="font-inter-900 italic text-2xl w-80 h-12 flex justify-center items-center ">Mohammed Abdullah</h3>
+              <h3 class="font-inter-900 italic text-2xl w-80 h-12 flex justify-center items-center bg-primary-color rounded-full">Mohammed@gmail.com</h3>
             </div>
           </div>
+          <!-- Buttons Container -->
           <div class="grid grid-cols-1 justify-items-center gap-y-4 w-full mt-8 md:grid-cols-2 md:gap-y-20">
             <button
-                class="w-[350px] h-16 rounded-full bg-black text-white font-inter-900 italic text-2xl cursor-pointer hover:text-primary-color active:scale-95 md:w-[400px] md:h-20 md:text-3xl"
+                class="w-[350px] h-16 rounded-full bg-black text-white font-inter-900 italic text-2xl cursor-pointer hover:text-primary-color active:scale-95 md:w-72 md:h-20 md:text-3xl lg:w-[400px]"
               >
               Edit Profile
               </button>
             <button
-                class="w-[350px] h-16 rounded-full bg-black text-white font-inter-900 italic text-2xl cursor-pointer hover:text-primary-color active:scale-95 md:w-[400px] md:h-20 md:text-3xl"
+                class="w-[350px] h-16 rounded-full bg-black text-white font-inter-900 italic text-2xl cursor-pointer hover:text-primary-color active:scale-95 md:w-72 md:h-20 md:text-3xl lg:w-[400px]"
               >
               Dark Mode
               </button>
             <button
-                class="w-[350px] h-16 rounded-full bg-black text-white font-inter-900 italic text-2xl cursor-pointer hover:text-primary-color active:scale-95 md:w-[400px] md:h-20 md:text-3xl"
+                class="w-[350px] h-16 rounded-full bg-black text-white font-inter-900 italic text-2xl cursor-pointer hover:text-primary-color active:scale-95 md:w-72 md:h-20 md:text-3xl lg:w-[400px]"
               >
               Delete Account
               </button>
@@ -93,7 +94,7 @@
         </main>
       </div>
 
-      <footer class="w-full absolute bottom-0 h-[10%] rounded-t-[40px] border-2 border-black flex justify-between px-5 items-center bg-primary-color md:bg-transparent md:h-0 md:pt-5 md:items-start md:relative md:rounded-t-0 md:hidden ">
+      <footer class="w-full h-[12%] rounded-t-[40px] border-2 border-black flex justify-between px-5 items-center bg-primary-color md:bg-transparent md:h-0 md:pt-5 md:items-start md:relative md:rounded-t-0 md:hidden ">
         <a href="#"
         class="bg-white size-16 flex items-center border-3 justify-center rounded-full"
       >

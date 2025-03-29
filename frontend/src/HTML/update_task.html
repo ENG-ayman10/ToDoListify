@@ -44,7 +44,7 @@
      
         <!-- Circle -->
         <div
-        class="hidden size-10 bg-black rounded-full -ml-[33px] text-primary-color md:flex md:justify-center items-center md:ml-4 md:mt-4"
+        class="hidden size-10 bg-black rounded-full -ml-[33px] text-primary-color md:flex md:justify-center items-center md:ml-4 md:mt-4 p-8"
       >
         <a href="#" class="-translate-y-1 text-3xl">&larr;</a
         >
@@ -53,7 +53,7 @@
         <main class="h-full w-full">
           <form
             action=""
-            class="flex flex-col justify-center items-center space-y-8 md:block md:ml-42"
+            class="flex flex-col justify-center items-center space-y-6 md:block md:ml-14 md:mr-3 md:space-y-8 lg:ml-42"
           >
           <!-- Title Input -->
           <div class="flex flex-col mt-8">
@@ -65,7 +65,7 @@
               <input
                 type="text"
                 id="title"
-                class="w-96 h-36 px-5 rounded-[52px] text-4xl bg-primary-color shadow-[1px_5px_4px_0px_#00000040] md:w-[794px]"
+                class="w-80 h-36 px-5 rounded-[52px] text-4xl bg-primary-color shadow-[1px_5px_4px_0px_#00000040] md:w-[594px] lg:w-[794px]"
               />
             </div>
             <!-- Describe Input -->
@@ -75,21 +75,21 @@
                 class="text-shadow font-inter-900 italic text-4xl h-11 w-24 pl-16"
                 >Describe</label
               >
-              <textarea name="describe" id="" class="w-96 h-36 px-5 py-11 resize-none rounded-[52px] text-4xl bg-primary-color shadow-[1px_5px_4px_0px_#00000040] md:w-[1143px]"></textarea>
+              <textarea name="describe" id="" class="w-80 h-36 px-5 py-11 resize-none rounded-[52px] text-4xl bg-primary-color shadow-[1px_5px_4px_0px_#00000040] md:w-[700px] lg:w-[1143px]"></textarea>
             </div>
             <!-- Buttons -->
             <div
-              class="grid grid-cols-2 justify-items-center gap-x-6 gap-y-10 md:gap-y-6 "
+              class="grid grid-cols-2 justify-items-center px-4 gap-x-6 gap-y-6 md:gap-y-6 md:px-4"
             >
             <!-- Status -->
-            <select class="appearance-none text-center w-44 h-14 rounded-full bg-primary-color text-white font-inter-900 italic text-2xl border-white border-e-3 border-b-3 shadow-[1px_5px_4px_0px_#00000040] cursor-pointer active:scale-95 hover:text-black md:w-64 md:h-16">
+            <select class="appearance-none text-center w-40 h-14 rounded-full bg-primary-color text-white font-inter-900 italic text-2xl border-white border-e-3 border-b-3 shadow-[1px_5px_4px_0px_#00000040] cursor-pointer active:scale-95 hover:text-black md:w-64 md:h-16">
               <option selected class="bg-white text-primary-color">Status</option>
               <option value="TO_DO" class="bg-white text-primary-color">TO DO</option>
               <option value="IN_PROGRESS" class="bg-white text-primary-color">IN PROGRESS</option>
               <option value="DONE" class="bg-white text-primary-color">DONE</option>
             </select>
             <!-- Priority -->
-            <select class="appearance-none text-center w-44 h-14 rounded-full bg-primary-color text-white font-inter-900 italic text-2xl border-white border-e-3 border-b-3 shadow-[1px_5px_4px_0px_#00000040] cursor-pointer active:scale-95 hover:text-black md:w-64 md:h-16">
+            <select class="appearance-none text-center w-40 h-14 rounded-full bg-primary-color text-white font-inter-900 italic text-2xl border-white border-e-3 border-b-3 shadow-[1px_5px_4px_0px_#00000040] cursor-pointer active:scale-95 hover:text-black md:w-64 md:h-16">
               <option selected class="bg-white text-primary-color">Priority</option>
               <option value="HIGH" class="bg-white text-primary-color">HIGH</option>
               <option value="MEDIUM" class="bg-white text-primary-color">MEDIUM</option>
