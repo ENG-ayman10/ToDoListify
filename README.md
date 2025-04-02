@@ -9,10 +9,10 @@ This is a simple yet powerful ToDo List application designed with a modern tech 
 - **WebServer**: Nginx – Used as the web server to handle HTTP requests and serve the frontend.
 
 ## Features
-- Login, register, logout, and delete users.
+- Login, register, logout, update and delete users.
 - Create, read, update, and delete tasks.
 - Task priority: high, medium, and low.
-- Task state: to-do, In Progress, and down.
+- Task state: to-do, In Progress, and done.
 - Responsive design for both desktop and mobile devices.
 - Task data is stored in a PostgreSQL database for persistence.
 - Easy deployment with Docker & Docker Compose.
