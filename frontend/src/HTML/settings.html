@@ -31,7 +31,7 @@
               Settings
             </h1>
           </div>
-          <button class="font-inter-900 w-24 h-8 rounded-full bg-black text-white text-[16px] col-span-2 absolute right-0 md:col-span-2 justify-self-center cursor-pointer hover:text-primary-color active:scale-95 md:w-36 md:h-16 md:text-2xl md:font-inter-600">LogOut</button>
+          <button id="logOut" class="font-inter-900 w-24 h-8 rounded-full bg-black text-white text-[16px] col-span-2 absolute right-0 md:col-span-2 justify-self-center cursor-pointer hover:text-primary-color active:scale-95 md:w-36 md:h-16 md:text-2xl md:font-inter-600">LogOut</button>
         </div>
       </header>
 
@@ -45,7 +45,7 @@
             >
               <img src="/Images/icons/person.png" alt="" class="h-14 w-9"/>
             </a>
-            <a href="#"
+            <a href="/src/HTML/home.html"
               class="bg-white size-18 flex items-center border-3 justify-center rounded-full"
             >
               <img src="/Images/icons/home.png" alt="" />
@@ -55,7 +55,7 @@
             >
               <img src="/Images/icons/search.png" alt="" />
             </a>
-            <a href="#"
+            <a href="/src/HTML/new_task.html"
               class="bg-white size-18 flex items-center border-3 justify-center rounded-full"
             >
               <img src="/Images/icons/plus.png" alt="" />
@@ -69,23 +69,23 @@
               <img src="/Images/icons/person.png" alt="" class="h-32 absolute left-1/2 -translate-x-1/2 top-1/2 md:h-48 md:w-32 -translate-y-5/12">
             </div>
             <div>
-              <h3 class="font-inter-900 italic text-2xl w-80 h-12 flex justify-center items-center ">Mohammed Abdullah</h3>
-              <h3 class="font-inter-900 italic text-2xl w-80 h-12 flex justify-center items-center bg-primary-color rounded-full">Mohammed@gmail.com</h3>
+              <h3 id="username" class="font-inter-900 italic text-2xl w-80 h-12 flex justify-center items-center "></h3>
+              <h3 id="email" class="font-inter-900 italic text-2xl w-80 h-12 flex justify-center items-center bg-primary-color rounded-full"></h3>
             </div>
           </div>
           <!-- Buttons Container -->
           <div class="grid grid-cols-1 justify-items-center gap-y-4 w-full mt-8 md:grid-cols-2 md:gap-y-20">
-            <button
-                class="w-[350px] h-16 rounded-full bg-black text-white font-inter-900 italic text-2xl cursor-pointer hover:text-primary-color active:scale-95 md:w-72 md:h-20 md:text-3xl lg:w-[400px]"
+            <a href="/src/HTML/edit_profile.html"
+                class="w-[350px] h-16 rounded-full flex justify-center items-center bg-black text-white font-inter-900 italic text-2xl cursor-pointer hover:text-primary-color active:scale-95 md:w-72 md:h-20 md:text-3xl lg:w-[400px]"
               >
               Edit Profile
-              </button>
+              </a>
             <button
                 class="w-[350px] h-16 rounded-full bg-black text-white font-inter-900 italic text-2xl cursor-pointer hover:text-primary-color active:scale-95 md:w-72 md:h-20 md:text-3xl lg:w-[400px]"
               >
               Dark Mode
               </button>
-            <button
+            <button id="delete_account"
                 class="w-[350px] h-16 rounded-full bg-black text-white font-inter-900 italic text-2xl cursor-pointer hover:text-primary-color active:scale-95 md:w-72 md:h-20 md:text-3xl lg:w-[400px]"
               >
               Delete Account
@@ -95,12 +95,12 @@
       </div>
 
       <footer class="w-full h-[12%] rounded-t-[40px] border-2 border-black flex justify-between px-5 items-center bg-primary-color md:bg-transparent md:h-0 md:pt-5 md:items-start md:relative md:rounded-t-0 md:hidden ">
-        <a href="#"
+        <a href="/src//HTML/home.html"
         class="bg-white size-16 flex items-center border-3 justify-center rounded-full"
       >
         <img src="/Images/icons/home.png" alt="" />
       </a>
-      <a href="#" class="bg-white size-16 flex items-center border-3 justify-center rounded-full">
+      <a href="/src/HTML/new_task.html" class="bg-white size-16 flex items-center border-3 justify-center rounded-full">
             <img src="/Images/icons/plus.png" alt=""  />
       </a>
       <a href="#" class="bg-white size-16 flex items-center justify-center rounded-full pt-3">
@@ -108,5 +108,9 @@
       </a>
       </footer>
     </div>
+
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+    <script src="/js/settings.js" type="module"></script>
   </body>
 </html>

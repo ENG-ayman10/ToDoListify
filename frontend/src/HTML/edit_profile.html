@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Profile</title>
-    <link
+    <!-- <link
       rel="stylesheet"
       href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css"
-    />
+    /> -->
     <link rel="stylesheet" href="/src/output.css" />
   </head>
   <body class="h-screen">
@@ -34,7 +34,7 @@
               class="circle p-2 flex items-center justify-center w-[50px] h-[50px] bg-black rounded-full hover:bg-[#efb700] transition duration-300 relative -top-2 md:-top-2 -left-6 md:hidden mr-3"
             >
               <a
-                href="javascript:history.back()"
+                href="/src/HTML/settings.html"
                 class="text-3xl font-bold text-[#efb700] hover:text-black transition duration-300"
                 >&larr;</a
               >
@@ -56,7 +56,7 @@
               class="hidden circle p-1 md:flex items-center justify-center w-[50px] h-[50px] bg-black rounded-full hover:bg-[#efb700] transition duration-300 relative -top-2 md:-top-2 md:-left-6"
             >
               <a
-                href="javascript:history.back()"
+                href="/src/HTML/settings.html"
                 class="back-btn text-[35px] mb-1 font-bold text-[#efb700] hover:text-white transition duration-300"
                 >&larr;</a
               >
@@ -66,7 +66,7 @@
               class="w-[180px] h-[180px] rounded-full bg-[#efb700] flex items-center justify-center mx-auto md:mx-0 md:mr-70"
             >
               <img
-                src="/Images/person.png"
+                src="/Images/icons/person.png"
                 alt="User"
                 class="w-[114px] h-[160px] mt-5"
               />
@@ -258,6 +258,7 @@
             <!-- Save Button -->
             <div class="flex items-center justify-center">
               <button
+                id="submitNewData"
                 type="submit"
                 class="bg-black text-white font-bold text-[18px] py-3 px-12 rounded-full hover:text-[#efb700] transition"
               >
@@ -269,6 +270,7 @@
       </div>
     </div>
     <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    <script src="/js/edit_profile.js"></script>
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+    <script src="/js/edit_profile.js" type="module"></script>
   </body>
 </html>

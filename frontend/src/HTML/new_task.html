@@ -28,7 +28,7 @@
             <div
               class="size-10 bg-black rounded-full -ml-[33px] text-primary-color flex justify-center items-center md:hidden"
             >
-              <a href="" class="-translate-y-1 text-3xl">&larr;</a
+              <a href="/src/HTML/home.html" class="-translate-y-1 text-3xl">&larr;</a
               >
             </div>
             <h1
@@ -51,7 +51,7 @@
             >
               <img src="/Images/icons/person.png" alt="" class="h-14 w-9" />
             </a>
-            <a href="#"
+            <a href="/src/HTML/home.html"
               class="bg-white size-18 flex items-center border-3 justify-center rounded-full"
             >
               <img src="/Images/icons/home.png" alt="" />
@@ -84,6 +84,7 @@
               <input
                 type="text"
                 id="title"
+                required
                 class="w-80 h-36 px-5 rounded-[52px] text-4xl bg-primary-color shadow-[1px_5px_4px_0px_#00000040] md:w-[594px] lg:w-[794px]"
               />
             </div>
@@ -94,28 +95,28 @@
                 class="text-shadow font-inter-900 italic text-4xl h-11 w-24 pl-16"
                 >Describe</label
               >
-              <textarea name="describe" id="" class="w-80 h-36 px-5 py-11 resize-none rounded-[52px] text-4xl bg-primary-color shadow-[1px_5px_4px_0px_#00000040] md:w-[700px] lg:w-[1143px]"></textarea>
+              <textarea name="describe" id="describe" required class="w-80 h-36 px-5 py-11 resize-none rounded-[52px] text-4xl bg-primary-color shadow-[1px_5px_4px_0px_#00000040] md:w-[700px] lg:w-[1143px]"></textarea>
             </div>
             <!-- Buttons -->
             <div
               class="grid grid-cols-2 justify-items-center px-4 gap-x-6 gap-y-6 md:gap-y-6 md:px-4 "
             >
             <!-- Status -->
-            <select class="appearance-none text-center w-40 h-14 rounded-full bg-primary-color text-white font-inter-900 italic text-2xl border-white border-e-3 border-b-3 shadow-[1px_5px_4px_0px_#00000040] cursor-pointer active:scale-95 hover:text-black md:w-64 md:h-16">
-              <option selected class="bg-white text-primary-color">Status</option>
-              <option value="TO_DO" class="bg-white text-primary-color">TO DO</option>
+            <select id="status" required class="appearance-none text-center w-40 h-14 rounded-full bg-primary-color text-white font-inter-900 italic text-2xl border-white border-e-3 border-b-3 shadow-[1px_5px_4px_0px_#00000040] cursor-pointer active:scale-95 hover:text-black md:w-64 md:h-16">
+              <option selected value="" class="bg-white text-primary-color">Status</option>
+              <option value="TO_DO" class="bg-white text-primary-color">UnFinished</option>
               <option value="IN_PROGRESS" class="bg-white text-primary-color">IN PROGRESS</option>
-              <option value="DONE" class="bg-white text-primary-color">DONE</option>
+              <option value="DONE" class="bg-white text-primary-color">Finished</option>
             </select>
             <!-- Priority -->
-            <select class="appearance-none text-center w-40 h-14 rounded-full bg-primary-color text-white font-inter-900 italic text-2xl border-white border-e-3 border-b-3 shadow-[1px_5px_4px_0px_#00000040] cursor-pointer active:scale-95 hover:text-black md:w-64 md:h-16">
-              <option selected class="bg-white text-primary-color">Priority</option>
+            <select id="priority" required class="appearance-none text-center w-40 h-14 rounded-full bg-primary-color text-white font-inter-900 italic text-2xl border-white border-e-3 border-b-3 shadow-[1px_5px_4px_0px_#00000040] cursor-pointer active:scale-95 hover:text-black md:w-64 md:h-16">
+              <option selected value="" class="bg-white text-primary-color">Priority</option>
               <option value="HIGH" class="bg-white text-primary-color">HIGH</option>
               <option value="MEDIUM" class="bg-white text-primary-color">MEDIUM</option>
               <option value="LOW" class="bg-white text-primary-color">LOW</option>
             </select>
             <!-- Submit -->
-              <button type="submit"
+              <button type="submit" id="submit"
                 class="w-40 h-12 rounded-full bg-black text-white font-inter-600 text-2xl col-span-2 hover:text-primary-color md:col-span-2 justify-self-center cursor-pointer active:scale-95 md:w-64 md:h-16 md:text-3xl"
               >
                 Save
@@ -125,5 +126,9 @@
         </main>
       </div>
     </div>
+
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+    <script type="module" src="/js/create_task.js"></script>
   </body>
 </html>

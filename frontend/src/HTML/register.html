@@ -113,8 +113,29 @@
               <label class="font-inter-900 ml-4 md:hidden">Password:</label>
               <input
                 id="password"
-                type="text"
+                type="password"
                 placeholder="Password"
+                required
+                class="input-field w-full bg-white text-black md:h-[60px] p-[5px] md:bg-[#efb700] border-[5px] border-white shadow-[10px_10px_10px_0px_#00000040] rounded-full md:text-white text-[25px] placeholder-white font-bold outline-none md:w-full"
+              />
+              <span class="absolute left-32 top-1/2 transform -translate-y-1/2">
+                <img src="/Images/Polygon 1.png" alt="" class="w-6" />
+              </span>
+              <button
+                type="button"
+                id="togglePassword"
+                class="absolute right-5 mt-7 text-black md:transform -translate-y-1/2 md:mt-7 md:text-white text-xl focus:outline-none"
+              >
+                <i id="eyeIcon" class="fa-solid fa-eye-slash"></i>
+              </button>
+            </div>
+            <!-- Confirm Password Input -->
+            <div class="relative w-full">
+              <label class="font-inter-900 ml-4 md:hidden">Confirm Password:</label>
+              <input
+                id="confirm_password"
+                type="password"
+                placeholder="Confirm Password"
                 required
                 class="input-field w-full bg-white text-black md:h-[60px] p-[5px] md:bg-[#efb700] border-[5px] border-white shadow-[10px_10px_10px_0px_#00000040] rounded-full md:text-white text-[25px] placeholder-white font-bold outline-none md:w-full"
               />
@@ -169,6 +190,7 @@
       </svg>
     </footer>
     <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    <script src="/js/scSignup.js"></script>
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+    <script src="/js/scSignup.js" type="module"></script>
   </body>
 </html>

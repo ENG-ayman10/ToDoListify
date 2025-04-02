@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+ 
+    <style>
+        @keyframes slideIn {
+            0% {
+                transform: translateY(100px); /* يبدأ من أسفل */
+                opacity: 0; /* النص غير مرئي في البداية */
+            }
+            100% {
+                transform: translateY(0); /* يتحرك للأعلى */
+                opacity: 1; /* يصبح النص مرئيًا */
+            }
+        }
+    </style>
+</head>
+<body class="bg-white flex flex-col items-center relative">
+
+    <!-- الهيدر -->
+    <header class="absolute bg-primary-color w-[1410px] h-[153px] top-[-43px] left-[-45px] 
+                rounded-[52px] border border-yellow-600 flex items-center shadow-lg px-10 
+                animate-slideIn">
+
+        <!-- النص مع الخط -->
+        <div class="relative ml-5"> <!-- زيادة المسافة عن الطرف -->
+            <h1 class="text-black text-4xl font-bold animate-slideInText">TO DO Listify</h1>
+            <div class="absolute left-0 bottom-[-5px] w-[200px] h-[4px] bg-white"></div>
+        </div>
+
+        <!-- زر تسجيل الخروج -->
+        <button id="logOut" class="absolute right-10 bg-black text-white w-32 px-6 py-3 rounded-full text-lg shadow-md hover:bg-gray-800 transition-all duration-300 cursor-pointer">
+            Log Out
+        </button>
+
+    </header>
+
+    <!-- الشريط الجانبي -->
+    <aside class="fixed left-0 top-[83px] h-full bg-primary-color p-5 flex flex-col items-center justify-start pt-10">
+        <div class="space-y-5">
+            <!-- الدوائر مع التأثير عند التركيز -->
+            <div class="group w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg 
+                        transition-all duration-300 focus-within:w-32 hover:w-32 focus-within:rounded-md hover:rounded-md ">
+                <a href="/src/HTML/settings.html"><i class='bx bxs-user text-4xl text-gray-800'></i></a>
+            </div>
+            <div id="showGrid" class="group w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg 
+            transition-all duration-300 cursor-pointer hover:w-32 hover:rounded-md">
+            <i class='bx bxs-home text-4xl text-gray-800'></i>
+            </div>
+
+            <div id="showSearch" class="group w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg 
+                transition-all duration-300 cursor-pointer hover:w-32 hover:rounded-md">
+                <i class='bx bx-search text-4xl text-gray-800'></i>
+            </div>
+
+            <div class="group w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg 
+                        transition-all duration-300 focus-within:w-32 hover:w-32 focus-within:rounded-md hover:rounded-md">
+                <a href="/src/HTML/new_task.html"><i class='bx bx-plus text-4xl text-gray-800'></i></a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- الشبكة التي ستظهر عند الضغط -->
+    <div id="gridContainer" class=" grid grid-cols-2 gap-5 absolute top-[167px] left-[135px]">
+        <!-- 6 عناصر داخل الشبكة -->
+
+    </div>
+
+    <!-- واجهة البحث (مخفية في البداية) -->
+    <div id="searchContainer" class="hidden absolute top-[143px] left-[235px] w-[1061px] h-[72px] bg-gray-200 rounded-[52px] border-r-2 border-b-2 border-gray-600 opacity-52 shadow-lg 
+        flex items-center space-x-3 px-5 animate-slideIn">
+    
+    <!-- أيقونة البحث في الطرف الأيمن السفلي -->
+    <button class="absolute bottom-[-10px] right-[-10px] w-[50px] h-[50px] bg-primary-color rounded-full 
+        flex items-center justify-center shadow-md border-2 border-gray-700">
+        <i class='bx bx-search text-white text-2xl'></i>
+    </button>
+
+    <!-- حقل البحث -->
+        <input type="text" placeholder="Search" class="w-full h-full bg-transparent text-gray-800 text-4xl font-semibold focus:outline-none placeholder-gray-500">
+    </div>
+
+
+    <script>
+        document.getElementById("showGrid").addEventListener("click", function() {
+            let grid = document.getElementById("gridContainer");
+            grid.classList.toggle("hidden");
+        });
+
+        // التحكم في إظهار البحث عند الضغط على أيقونة البحث
+        document.getElementById("showSearch").addEventListener("click", function() {
+            document.getElementById("searchContainer").classList.toggle("hidden");
+            document.getElementById("gridContainer").classList.add("hidden"); // إخفاء الشبكة
+        });
+    </script>
+    
+    <style>
+        .animate-slideInText {
+            animation: slideIn 1s ease-out forwards; /* التفعيل */
+        }
+    </style>
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+    <script src="/js/home.js" type="module"></script>
+
+</body>
+</html>

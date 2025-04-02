@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTRO</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"
+    />
+    <style>
+        @keyframes floatBubble1 {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-10px); opacity: 0.8; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes floatBubble2 {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(10px); opacity: 0.8; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes underlineGrow {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen bg-white relative overflow-hidden">
+    <div class="absolute top-[-150px] right-[-150px] w-[450px] h-[450px] bg-yellow-500 rounded-full opacity-50 animate-[floatBubble1_3s_infinite]"></div>
+    <div class="absolute bottom-[-150px] left-[-150px] w-[450px] h-[450px] bg-yellow-500 rounded-full opacity-50 animate-[floatBubble2_3s_infinite]"></div>
+    
+    <div class="text-black text-xl relative w-[10vw]">
+        <span id="text" class="font-extrabold text-6xl"></span>
+        <div class="h-1 bg-black mt-2 animate-[underlineGrow_2s_linear]" style="width: 0; height: 5px;"></div>
+    </div>
+    
+    <script>
+        const textElement = document.getElementById('text');
+        const lineElement = document.querySelector('.h-1');
+        const text = "TO DO Listify";
+        let index = 0;
+
+        function typeText() {
+            if (index < text.length) {
+                textElement.innerHTML = text.substring(0, index + 1) + '<span class="border-r-4 border-black"></span>';
+                index++;
+                setTimeout(typeText, 100);
+            } else {
+                lineElement.style.width = "100%";
+            }
+        }
+        setTimeout(typeText, 500);
+    </script>
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+    <script src="/js/start.js" type="module"></script>
+</body>
+</html>
