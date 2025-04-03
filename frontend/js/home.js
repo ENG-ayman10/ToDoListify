@@ -1,13 +1,18 @@
+import { baseURL } from "./config.js";
+
 const gridContainer = document.getElementById("gridContainer");
 const logOut_btn = document.getElementById("logOut");
 let accessToken = localStorage.getItem("accessToken");
 
-const baseURL = "https://todolistify-backend.up.railway.app";
+const axiosInstance = axios.create({
+    baseURL: baseURL,
+    withCredentials: true,
+  });
 
 // Get Tasks
 const getTasks = async (token) => {
     try {
-        let response = await axios.get(`${baseURL}/api/v1/task`, {
+        let response = await axiosInstance.get(`/api/v1/task`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -55,7 +60,7 @@ const getTasks = async (token) => {
 
             if (status === 401) {
                 try {
-                    const refreshResponse = await axios.get(`${baseURL}/api/v1/user/refresh`);
+                    const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
                     localStorage.setItem("accessToken", refreshResponse.data.accessToken);
                     accessToken = refreshResponse.data.accessToken;
                     return getTasks(accessToken);
@@ -134,7 +139,7 @@ async function deleteTask(id) {
     }
 
     try {
-        await axios.delete(`${baseURL}/api/v1/task/delete/${id}`, {
+        await axiosInstance.delete(`/api/v1/task/delete/${id}`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
@@ -155,7 +160,7 @@ async function deleteTask(id) {
 
             if (status === 401) {
                 try {
-                    const refreshResponse = await axios.get(`${baseURL}/api/v1/user/refresh`);
+                    const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
                     localStorage.setItem("accessToken", refreshResponse.data.accessToken);
                     accessToken = refreshResponse.data.accessToken;
                     return deleteTask(accessToken);
@@ -232,7 +237,7 @@ logOut_btn.addEventListener("click", async () => {
     }
 
     try {
-        await axios.post(`${baseURL}/api/v1/user/logout`, null, {
+        await axiosInstance.post(`/api/v1/user/logout`, null, {
             headers: { Authorization: `Bearer ${accessToken}` },
         });
         
@@ -246,7 +251,7 @@ logOut_btn.addEventListener("click", async () => {
 
             if (status === 401) {
                 try {
-                    const refreshResponse = await axios.get(`${baseURl}/api/v1/user/refresh`);
+                    const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
                     localStorage.setItem("accessToken", refreshResponse.data.accessToken);
                     return delete_account_btn.click(); 
                 } catch (refreshError) {

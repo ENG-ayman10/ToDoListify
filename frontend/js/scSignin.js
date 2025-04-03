@@ -1,3 +1,4 @@
+import { baseURL } from "./config.js";
 
 document.getElementById("signInBtn").addEventListener("click", function (event) {
     event.preventDefault();
@@ -9,7 +10,10 @@ document.getElementById("signInBtn").addEventListener("click", function (event) 
     //Check Valid Password
     const passwordIsValid = /((?=.*\d)|(?=.*\w+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(password);
     // API
-    const baseURL = "https://todolistify-backend.up.railway.app";
+    const axiosInstance = axios.create({
+      baseURL: baseURL,
+      withCredentials: true,
+    });
 
     if (!username || !password) {
       Swal.fire({
@@ -37,7 +41,7 @@ document.getElementById("signInBtn").addEventListener("click", function (event) 
       return;  // ← هذا يمنع استمرار الكود
     }
 
-    axios.post(`${baseURL}/api/v1/user/login`, {
+    axiosInstance.post(`/api/v1/user/login`, {
       "username": username,
       "password": password
     })

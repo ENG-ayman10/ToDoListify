@@ -1,10 +1,15 @@
+import { baseURL } from "./config.js";
+
 document.addEventListener('DOMContentLoaded', () => {
-    const baseURL = "https://todolistify-backend.up.railway.app";
+    const axiosInstance = axios.create({
+        baseURL: baseURL,
+        withCredentials: true,
+      });
     let accessToken = localStorage.getItem("accessToken");
 
     async function checkLoged() {
         try {
-            const refreshResponse = await axios.get(`${baseURL}/api/v1/user/refresh`);
+            const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
             localStorage.setItem("accessToken", refreshResponse.data.accessToken);
             setTimeout(()=> {
                 window.location.href = "/src/HTML/home.html"

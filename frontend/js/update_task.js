@@ -1,6 +1,10 @@
+import { baseURL } from "./config.js";
+
 let accessToken = localStorage.getItem("accessToken");
-// API
-const baseURL = "https://todolistify-backend.up.railway.app";
+const axiosInstance = axios.create({
+    baseURL: baseURL,
+    withCredentials: true,
+  });
 
 const params = new URLSearchParams(window.location.search);
 const index = params.get("index"); // استرجاع قيمة index من الـ URL
@@ -8,7 +12,7 @@ const task_id = params.get("task-id"); // استرجاع قيمة index من ا�
 
 const getTasks = async (token) => {
     try {
-        let response = await axios.get(`${baseURL}/api/v1/task`,{
+        let response = await axiosInstance.get(`/api/v1/task`,{
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -25,7 +29,7 @@ const getTasks = async (token) => {
 
             if (status === 401) {
                 try {
-                    const refreshResponse = await axios.get(`${baseURL}/api/v1/user/refresh`);
+                    const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
                     localStorage.setItem("accessToken", refreshResponse.data.accessToken);
                     accessToken = refreshResponse.data.accessToken;
                     return getTasks(accessToken); 
@@ -71,7 +75,7 @@ getTasks(accessToken);
 
 const updateTask = async (task_id, token, title, describe, status, priority) => {
     try{
-        await axios.patch(`${baseURL}/api/v1/task/update/${task_id}`, {
+        await axiosInstance.patch(`/api/v1/task/update/${task_id}`, {
             "title": title,
             "body": describe,
             "state": status,
@@ -101,7 +105,7 @@ const updateTask = async (task_id, token, title, describe, status, priority) => 
 
             if (status === 401) {
                 try {
-                    const refreshResponse = await axios.get(`${baseURL}/api/v1/user/refresh`);
+                    const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
                     localStorage.setItem("accessToken", refreshResponse.data.accessToken);
                     accessToken = refreshResponse.data.accessToken;
                     return updateTask(task_id, accessToken, title, describe, status, priority); 

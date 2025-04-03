@@ -1,13 +1,17 @@
+import { baseURL } from "./config.js";
+
 const delete_account_btn = document.getElementById("delete_account");
 const logOut_btn = document.getElementById("logOut");
 let email = document.getElementById("email");
 let username = document.getElementById("username");
 const accessToken = localStorage.getItem("accessToken");
-const baseURL = "https://todolistify-backend.up.railway.app";
+const axiosInstance = axios.create({
+    baseURL: baseURL,
+    withCredentials: true,
+  });
 
 email.textContent=localStorage.getItem("email");
 username.textContent=localStorage.getItem("username");
-
 
 
 // Delete User Account
@@ -44,7 +48,7 @@ delete_account_btn.addEventListener("click", async () => {
     }
 
     try {
-        await axios.delete(`${baseURL}/api/v1/user/delete`, {
+        await axiosInstance.delete(`/api/v1/user/delete`, {
             headers: { Authorization: `Bearer ${accessToken}` },
             data: { password } 
         });
@@ -66,7 +70,7 @@ delete_account_btn.addEventListener("click", async () => {
 
             if (status === 401) {
                 try {
-                    const refreshResponse = await axios.get(`${baseURL}/api/v1/user/refresh`);
+                    const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
                     localStorage.setItem("accessToken", refreshResponse.data.accessToken);
                     return delete_account_btn.click(); 
                 } catch (refreshError) {
@@ -131,7 +135,7 @@ logOut_btn.addEventListener("click", async () => {
     }
 
     try {
-        await axios.post(`${baseURL}/api/v1/user/logout`, null, {
+        await axiosInstance.post(`/api/v1/user/logout`, null, {
             headers: { Authorization: `Bearer ${accessToken}` },
         });
         
@@ -145,7 +149,7 @@ logOut_btn.addEventListener("click", async () => {
 
             if (status === 401) {
                 try {
-                    const refreshResponse = await axios.get(`${baseURL}/api/v1/user/refresh`);
+                    const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
                     localStorage.setItem("accessToken", refreshResponse.data.accessToken);
                     return delete_account_btn.click(); 
                 } catch (refreshError) {

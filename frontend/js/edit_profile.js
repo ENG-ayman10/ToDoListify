@@ -1,3 +1,4 @@
+import { baseURL } from "./config.js";
 const openModal = document.getElementById("openModal");
 const cancelModal = document.getElementById("cancelModal");
 const modal = document.getElementById("modal");
@@ -11,7 +12,12 @@ const submitNewPassword = document.getElementById("submitNewPassword");
 const submitNewData = document.getElementById("submitNewData");
 
 // API
-const baseURL = "https://todolistify-backend.up.railway.app";
+const axiosInstance = axios.create({
+  baseURL: baseURL,
+  withCredentials: true,
+});
+
+
 let accessToken = localStorage.getItem("accessToken");
 
 // Set Inputs
@@ -71,7 +77,7 @@ nextStep.addEventListener("click", (event) => {
   event.preventDefault();
   const password = document.getElementById("password").value.trim();
   
-  if (password.value !== "") {
+  if (password !== "") {
       modal.classList.add("hidden");
       newPasswordModal.classList.remove("hidden");
       newPasswordModal.classList.add("flex");
@@ -121,7 +127,7 @@ submitNewPassword.addEventListener("click", function () {
 
     const modifyPassword = async (token) => {
       try {
-          await axios.patch(`${baseURL}/api/v1/user/update/pass`, {
+          await axiosInstance.patch(`/api/v1/user/update/pass`, {
             "oldPassword": document.getElementById("password").value,
             "password": newPassword,
             "confirmation": confirmPassword
@@ -145,7 +151,7 @@ submitNewPassword.addEventListener("click", function () {
     
               if (status === 401) {
                   try {
-                      const refreshResponse = await axios.get(`${baseURL}/api/v1/user/refresh`);
+                      const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
                       localStorage.setItem("accessToken", refreshResponse.data.accessToken);
                       accessToken = refreshResponse.data.accessToken;
                       return modifyPassword(accessToken); 
@@ -222,7 +228,7 @@ submitNewData.addEventListener("click", (e) => {
   } else {
     const modifyUserInformation = async (token) => {
       try {
-          const response = await axios.patch(`${baseURL}/api/v1/user/update/info`, {
+          const response = await axiosInstance.patch(`/api/v1/user/update/info`, {
             "name": fullname,
             "username": username,
             "email": email,
@@ -250,7 +256,7 @@ submitNewData.addEventListener("click", (e) => {
     
               if (status === 401) {
                   try {
-                      const refreshResponse = await axios.get(`${baseURL}/api/v1/user/refresh`);
+                      const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
                       localStorage.setItem("accessToken", refreshResponse.data.accessToken);
                       accessToken = refreshResponse.data.accessToken;
                       return modifyUserInformation(accessToken); 

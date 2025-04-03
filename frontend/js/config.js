@@ -1,0 +1,1 @@
+export const baseURL = "https://todolistify-backend.up.railway.app";

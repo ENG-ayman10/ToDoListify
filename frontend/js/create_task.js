@@ -1,3 +1,4 @@
+import { baseURL } from "./config.js";
 document.getElementById("submit").addEventListener("click", async (e) => {
     e.preventDefault();
 
@@ -7,7 +8,10 @@ document.getElementById("submit").addEventListener("click", async (e) => {
     const priority = document.getElementById("priority").value;
     let accessToken = localStorage.getItem("accessToken");
 
-    const baseURL = "https://todolistify-backend.up.railway.app";
+    const axiosInstance = axios.create({
+        baseURL: baseURL,
+        withCredentials: true,
+      });
 
     if (!title || !describe || !status || !priority) {
         Swal.fire({
@@ -31,7 +35,7 @@ document.getElementById("submit").addEventListener("click", async (e) => {
 
     const createTask = async (token) => {
         try {
-            const response = await axios.post(`${baseURL}/api/v1/task/create`, {
+            const response = await axiosInstance.post(`/api/v1/task/create`, {
                 "title": title,
                 "body": describe,
                 "state": status,
@@ -59,7 +63,7 @@ document.getElementById("submit").addEventListener("click", async (e) => {
 
                 if (status === 401) {
                     try {
-                        const refreshResponse = await axios.get(`${baseURL}/api/v1/user/refresh`);
+                        const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
                         localStorage.setItem("accessToken", refreshResponse.data.accessToken);
                         accessToken = refreshResponse.data.accessToken;
                         return createTask(accessToken); 

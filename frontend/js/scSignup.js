@@ -1,3 +1,4 @@
+import { baseURL } from "./config.js";
 
 document.getElementById("signup").addEventListener("click", function (event) {
   event.preventDefault();
@@ -8,7 +9,10 @@ document.getElementById("signup").addEventListener("click", function (event) {
   const password = document.getElementById("password").value.trim();
   const confirm_password = document.getElementById("confirm_password").value.trim();
   // API
-  const baseURL = "https://todolistify-backend.up.railway.app";
+  const axiosInstance = axios.create({
+    baseURL: baseURL,
+    withCredentials: true,
+  });
   //Check Name no have any numbers or symbols
   const nameIsValid = /^[a-zA-Z\s]{2,255}$/.test(fullname);
   //Check Valid Username
@@ -73,7 +77,7 @@ document.getElementById("signup").addEventListener("click", function (event) {
   }
   
   else {
-    axios.post(`${baseURL}/api/v1/user/register`, {
+    axiosInstance.post(`/api/v1/user/register`, {
           "name": fullname,
           "username": username,
           "email": email,
