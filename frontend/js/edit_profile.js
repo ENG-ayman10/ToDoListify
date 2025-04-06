@@ -17,14 +17,12 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-
 let accessToken = localStorage.getItem("accessToken");
 
 // Set Inputs
-document.getElementById("fullname").value = localStorage.getItem("name").trim();
-document.getElementById("email").value = localStorage.getItem("email").trim();
-document.getElementById("username").value = localStorage.getItem("username").trim();
-
+document.getElementById("fullname").value = localStorage.getItem("name");
+document.getElementById("email").value = localStorage.getItem("email");
+document.getElementById("username").value = localStorage.getItem("username");
 
 // Prevent page reload when clicking the button
 openModal.addEventListener("click", (event) => {
@@ -76,11 +74,11 @@ document
 nextStep.addEventListener("click", (event) => {
   event.preventDefault();
   const password = document.getElementById("password").value.trim();
-  
+
   if (password !== "") {
-      modal.classList.add("hidden");
-      newPasswordModal.classList.remove("hidden");
-      newPasswordModal.classList.add("flex");
+    modal.classList.add("hidden");
+    newPasswordModal.classList.remove("hidden");
+    newPasswordModal.classList.add("flex");
     // Here, you can open the second modal
   } else {
     Swal.fire({
@@ -101,7 +99,8 @@ submitNewPassword.addEventListener("click", function () {
   const newPassword = newPasswordInput.value.trim();
   const confirmPassword = confirmPasswordInput.value.trim();
   //Check Valid Password
-  const passwordIsValid = /((?=.*\d)|(?=.*\w+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(newPassword);
+  const passwordIsValid =
+    /((?=.*\d)|(?=.*\w+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(newPassword);
 
   if (!passwordIsValid) {
     Swal.fire({
@@ -120,93 +119,103 @@ submitNewPassword.addEventListener("click", function () {
       confirmButtonColor: "#d33",
     });
   } else {
-
-    console.log("old",document.getElementById("password").value )
-    console.log("new",newPassword )
-    console.log("new",confirmPassword )
+    console.log("old", document.getElementById("password").value);
+    console.log("new", newPassword);
+    console.log("new", confirmPassword);
 
     const modifyPassword = async (token) => {
       try {
-          await axiosInstance.patch(`/api/v1/user/update/pass`, {
-            "oldPassword": document.getElementById("password").value,
-            "password": newPassword,
-            "confirmation": confirmPassword
-          }, {
-              headers: { Authorization: `Bearer ${token}` }
-          });
-    
-          Swal.fire({
-            icon: "success",
-            title: "✅ Password Updated",
-            text: "Your password has been successfully updated!",
-            confirmButtonText: "OK",
-            confirmButtonColor: "#efb700",
-          }).then(() => {
-            newPasswordModal.classList.add("hidden");
-          });
-    
-      } catch (error) {
-          if (error.response) {
-              const status = error.response.status;
-    
-              if (status === 401) {
-                  try {
-                      const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
-                      localStorage.setItem("accessToken", refreshResponse.data.accessToken);
-                      accessToken = refreshResponse.data.accessToken;
-                      return modifyPassword(accessToken); 
-                  } catch (refreshError) {
-                      if (refreshError.response && refreshError.response.status === 401) {
-                          Swal.fire({
-                              icon: "error",
-                              title: "Session Expired",
-                              text: "You have to log in again.",
-                              confirmButtonColor: "#d33",
-                          }).then(() => {
-                              window.location.href = "/src/HTML/welcome.html";
-                          });
-                      }
-                  }
-              } else if (status === 400) {
-                  Swal.fire({
-                      icon: "error",
-                      title: "Invalid Request",
-                      text: "Please check your input and try again.",
-                      confirmButtonColor: "#d33",
-                  });
-              }else if (status === 403) {
-                Swal.fire({
-                  icon: "error",
-                  title: "Forbidden",
-                  text: "You are not authorized to update this account.",
-                  confirmButtonColor: "#d33",
-                });
-              } else if (status === 404) {
-                Swal.fire({
-                  icon: "error",
-                  title: "User Not Found",
-                  text: "This account does not exist.",
-                  confirmButtonColor: "#d33",
-                });
-              } else if (status === 500) {
-                  Swal.fire({
-                      icon: "error",
-                      title: "Server Error",
-                      text: "Something went wrong. Please try again later.",
-                      confirmButtonColor: "#d33",
-                  });
-              }
-          } else {
-              Swal.fire({
-                  icon: "error",
-                  title: "Network Error",
-                  text: "Please check your internet connection and try again.",
-                  confirmButtonColor: "#d33",
-              });
+        await axiosInstance.patch(
+          `/api/v1/user/update/pass`,
+          {
+            oldPassword: document.getElementById("password").value,
+            password: newPassword,
+            confirmation: confirmPassword,
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
           }
+        );
+
+        Swal.fire({
+          icon: "success",
+          title: "✅ Password Updated",
+          text: "Your password has been successfully updated!",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#efb700",
+        }).then(() => {
+          newPasswordModal.classList.add("hidden");
+        });
+      } catch (error) {
+        if (error.response) {
+          const status = error.response.status;
+
+          if (status === 401) {
+            try {
+              const refreshResponse = await axiosInstance.get(
+                `/api/v1/user/refresh`
+              );
+              localStorage.setItem(
+                "accessToken",
+                refreshResponse.data.accessToken
+              );
+              accessToken = refreshResponse.data.accessToken;
+              return modifyPassword(accessToken);
+            } catch (refreshError) {
+              if (
+                refreshError.response &&
+                refreshError.response.status === 401
+              ) {
+                Swal.fire({
+                  icon: "error",
+                  title: "Session Expired",
+                  text: "You have to log in again.",
+                  confirmButtonColor: "#d33",
+                }).then(() => {
+                  window.location.href = "/src/HTML/welcome.html";
+                });
+              }
+            }
+          } else if (status === 400) {
+            Swal.fire({
+              icon: "error",
+              title: "Invalid Request",
+              text: "Please check your input and try again.",
+              confirmButtonColor: "#d33",
+            });
+          } else if (status === 403) {
+            Swal.fire({
+              icon: "error",
+              title: "Forbidden",
+              text: "You are not authorized to update this account.",
+              confirmButtonColor: "#d33",
+            });
+          } else if (status === 404) {
+            Swal.fire({
+              icon: "error",
+              title: "User Not Found",
+              text: "This account does not exist.",
+              confirmButtonColor: "#d33",
+            });
+          } else if (status === 500) {
+            Swal.fire({
+              icon: "error",
+              title: "Server Error",
+              text: "Something went wrong. Please try again later.",
+              confirmButtonColor: "#d33",
+            });
+          }
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Network Error",
+            text: "Please check your internet connection and try again.",
+            confirmButtonColor: "#d33",
+          });
+        }
       }
     };
-    
+
     modifyPassword(accessToken);
   }
 });
@@ -228,95 +237,105 @@ submitNewData.addEventListener("click", (e) => {
   } else {
     const modifyUserInformation = async (token) => {
       try {
-          const response = await axiosInstance.patch(`/api/v1/user/update/info`, {
-            "name": fullname,
-            "username": username,
-            "email": email,
-          }, {
-              headers: { Authorization: `Bearer ${token}` }
-          })
-            // Save token to local storage
-            localStorage.setItem("accessToken", response.data.accessToken);
-            // Save Information to local storage
-            localStorage.setItem("name", response.data.user.name);
-            localStorage.setItem("username", response.data.user.username);
-            localStorage.setItem("email", response.data.user.email);
-            localStorage.setItem("update_at", response.data.user.update_at);
-
-            Swal.fire({
-              icon: "success",
-              title: "✅ information Updated",
-              text: "Your information has been successfully updated!",
-              confirmButtonText: "OK",
-              confirmButtonColor: "#efb700",
-            })
-      } catch (error) {
-          if (error.response) {
-              const status = error.response.status;
-    
-              if (status === 401) {
-                  try {
-                      const refreshResponse = await axiosInstance.get(`/api/v1/user/refresh`);
-                      localStorage.setItem("accessToken", refreshResponse.data.accessToken);
-                      accessToken = refreshResponse.data.accessToken;
-                      return modifyUserInformation(accessToken); 
-                  } catch (refreshError) {
-                      if (refreshError.response && refreshError.response.status === 401) {
-                          Swal.fire({
-                              icon: "error",
-                              title: "Session Expired",
-                              text: "You have to log in again.",
-                              confirmButtonColor: "#d33",
-                          }).then(() => {
-                              window.location.href = "/src/HTML/welcome.html";
-                          });
-                      }
-                  }
-              } else if (status === 400) {
-                  Swal.fire({
-                      icon: "error",
-                      title: "Invalid Request",
-                      text: "Please check your input and try again.",
-                      confirmButtonColor: "#d33",
-                  });
-              }else if (status === 403) {
-                Swal.fire({
-                  icon: "error",
-                  title: "Forbidden",
-                  text: "You are not authorized to update this account.",
-                  confirmButtonColor: "#d33",
-                });
-              } else if (status === 404) {
-                Swal.fire({
-                  icon: "error",
-                  title: "User Not Found",
-                  text: "This account does not exist.",
-                  confirmButtonColor: "#d33",
-                });
-              } else if (status === 500) {
-                  Swal.fire({
-                      icon: "error",
-                      title: "Server Error",
-                      text: "Something went wrong. Please try again later.",
-                      confirmButtonColor: "#d33",
-                  });
-              }
-          } else {
-              Swal.fire({
-                  icon: "error",
-                  title: "Network Error",
-                  text: "Please check your internet connection and try again.",
-                  confirmButtonColor: "#d33",
-              });
+        const response = await axiosInstance.patch(
+          `/api/v1/user/update/info`,
+          {
+            name: fullname,
+            username: username,
+            email: email,
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
           }
+        );
+        // Save token to local storage
+        localStorage.setItem("accessToken", response.data.accessToken);
+        // Save Information to local storage
+        localStorage.setItem("name", response.data.user.name);
+        localStorage.setItem("username", response.data.user.username);
+        localStorage.setItem("email", response.data.user.email);
+        localStorage.setItem("update_at", response.data.user.update_at);
+
+        Swal.fire({
+          icon: "success",
+          title: "✅ information Updated",
+          text: "Your information has been successfully updated!",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#efb700",
+        });
+      } catch (error) {
+        if (error.response) {
+          const status = error.response.status;
+
+          if (status === 401) {
+            try {
+              const refreshResponse = await axiosInstance.get(
+                `/api/v1/user/refresh`
+              );
+              localStorage.setItem(
+                "accessToken",
+                refreshResponse.data.accessToken
+              );
+              accessToken = refreshResponse.data.accessToken;
+              return modifyUserInformation(accessToken);
+            } catch (refreshError) {
+              if (
+                refreshError.response &&
+                refreshError.response.status === 401
+              ) {
+                Swal.fire({
+                  icon: "error",
+                  title: "Session Expired",
+                  text: "You have to log in again.",
+                  confirmButtonColor: "#d33",
+                }).then(() => {
+                  window.location.href = "/src/HTML/welcome.html";
+                });
+              }
+            }
+          } else if (status === 400) {
+            Swal.fire({
+              icon: "error",
+              title: "Invalid Request",
+              text: "Please check your input and try again.",
+              confirmButtonColor: "#d33",
+            });
+          } else if (status === 403) {
+            Swal.fire({
+              icon: "error",
+              title: "Forbidden",
+              text: "You are not authorized to update this account.",
+              confirmButtonColor: "#d33",
+            });
+          } else if (status === 404) {
+            Swal.fire({
+              icon: "error",
+              title: "User Not Found",
+              text: "This account does not exist.",
+              confirmButtonColor: "#d33",
+            });
+          } else if (status === 500) {
+            Swal.fire({
+              icon: "error",
+              title: "Server Error",
+              text: "Something went wrong. Please try again later.",
+              confirmButtonColor: "#d33",
+            });
+          }
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Network Error",
+            text: "Please check your internet connection and try again.",
+            confirmButtonColor: "#d33",
+          });
+        }
       }
     };
-    
+
     modifyUserInformation(accessToken);
   }
-
-  }
-)
+});
 
 // Close new password modal
 closeNewPasswordModal.addEventListener("click", function () {
